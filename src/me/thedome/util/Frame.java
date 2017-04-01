@@ -42,8 +42,11 @@ public class Frame extends JFrame {
 				inputpanel.setLayout(new FlowLayout());
 				inputpanel.setMaximumSize(new Dimension(500, inputpanel.getPreferredSize().height));
 
-				JSpinner spinner = new JSpinner(new SpinnerNumberModel(3000, 500, 10000, 500));
+				JSpinner timeUntilCopySpinner = new JSpinner(new SpinnerNumberModel(3000, 500, 10000, 500));
+				JSpinner msBetweenClickSpinner = new JSpinner((new SpinnerNumberModel(10, 10, 1000, 10)));
 
+
+				JLabel msBetweenClick = new JLabel("ms between keypresses");
 				JLabel label = new JLabel("ms until copy");
 				JButton startButton = new JButton("Paste");
 				JButton stopButton = new JButton("Stop");
@@ -51,7 +54,7 @@ public class Frame extends JFrame {
 				stopButton.setEnabled(false);
 
 				startListener = e -> {
-					p = new Paster(textArea.getText(), Integer.parseInt(spinner.getValue().toString()), stopButton);
+					p = new Paster(textArea.getText(), Integer.parseInt(timeUntilCopySpinner.getValue().toString()), stopButton, Integer.parseInt(msBetweenClickSpinner.getValue().toString()));
 					p.start();
 				};
 
@@ -67,8 +70,10 @@ public class Frame extends JFrame {
 				panel.add(scroller);
 				inputpanel.add(stopButton);
 				inputpanel.add(startButton);
-				inputpanel.add(spinner);
+				inputpanel.add(timeUntilCopySpinner);
 				inputpanel.add(label);
+				inputpanel.add(msBetweenClickSpinner);
+				inputpanel.add(msBetweenClick);
 				panel.add(inputpanel);
 
 
