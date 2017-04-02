@@ -18,7 +18,7 @@ class Paster extends Thread {
 	private int millisBetweenClick;
 	private Robot robot = null;
 
-	public Paster(String s, int milis, JButton stop, int milisBetweenClick) {
+	Paster(String s, int milis, JButton stop, int milisBetweenClick) {
 		paste = s;
 		delay = milis;
 		stopButton = stop;
@@ -60,7 +60,7 @@ class Paster extends Thread {
 		}
 	}
 
-	public void stopKeys() {
+	void stopKeys() {
 		stop = true;
 	}
 
