@@ -11,17 +11,18 @@ import static java.awt.event.KeyEvent.*;
  */
 class Paster extends Thread {
 
+	private boolean stop = false;
+	private String paste;
+	private int delay;
+	private JButton stopButton;
+	private int millisBetweenClick;
 	private Robot robot = null;
-	boolean stop = false;
 
-	String paste;
-	int delay;
-	JButton stopButton;
-
-	public Paster(String s, int milis, JButton stop){
+	public Paster(String s, int milis, JButton stop, int milisBetweenClick) {
 		paste = s;
 		delay = milis;
 		stopButton = stop;
+		millisBetweenClick = milisBetweenClick;
 	}
 
 	@Override
@@ -40,23 +41,31 @@ class Paster extends Thread {
 			sleep(millis);
 
 			robot = new Robot();
+			String[] splitString = s.split("\n");
+
 
 			for (int i = 0; i < s.length(); i++) {
-				if(stop) return;
-				returnKeyValue(s.charAt(i));
+				if (stop) return;
+				if (s.charAt(i) == '\r') {
+					returnKeyValue(s.charAt(++i));
+					returnKeyValue(s.charAt(i - 1));
+				} else {
+					returnKeyValue(s.charAt(i));
+				}
 			}
 
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 
-	public void stopKeys(){
+	public void stopKeys() {
 		stop = true;
 	}
 
-	private void returnKeyValue(char s) {
+	private void returnKeyValue(char s) throws Exception {
+		System.out.print(s);
 		switch (s) {
 			case 'a':
 				doType(VK_A);
@@ -295,25 +304,29 @@ class Paster extends Thread {
 				doType(VK_PLUS);
 				break;
 			case '\t':
-				doType(VK_TAB);
+				doType(VK_SPACE);
 				break;
 			case '\n':
 				doType(VK_ENTER);
 				break;
 			case '[':
-				doType(VK_ALT, VK_NUMPAD9, VK_NUMPAD1);
+				Thread.sleep(10);
+				doType(VK_CONTROL, VK_ALT, VK_8);
 				break;
 			case ']':
-				doType(VK_ALT, VK_NUMPAD9, VK_NUMPAD3);
+				Thread.sleep(10);
+				doType(VK_CONTROL, VK_ALT, VK_9);
 				break;
 			case '\\':
 				doType(VK_BACK_SLASH);
 				break;
 			case '{':
-				doType(VK_ALT, VK_NUMPAD1, VK_NUMPAD2, VK_NUMPAD3);
+				Thread.sleep(10);
+				doType(VK_CONTROL, VK_ALT, VK_7);
 				break;
 			case '}':
-				doType(VK_ALT, VK_NUMPAD1, VK_NUMPAD2, VK_NUMPAD5);
+				Thread.sleep(10);
+				doType(VK_CONTROL, VK_ALT, VK_0);
 				break;
 			case '|':
 				doType(VK_SHIFT, VK_BACK_SLASH);
@@ -322,7 +335,7 @@ class Paster extends Thread {
 				doType(VK_SHIFT, VK_COMMA);
 				break;
 			case ':':
-				doType(VK_COLON);
+				doType(VK_SHIFT, VK_PERIOD);
 				break;
 			case '\'':
 				doType(VK_QUOTE);
@@ -334,16 +347,16 @@ class Paster extends Thread {
 				doType(VK_COMMA);
 				break;
 			case '<':
-				doType(VK_ALT, VK_NUMPAD6, VK_NUMPAD0);
+				doType(VK_LESS);
 				break;
 			case '.':
 				doType(VK_PERIOD);
 				break;
 			case '>':
-				doType(VK_ALT, VK_NUMPAD6, VK_NUMPAD2);
+				doType(VK_SHIFT, VK_LESS);
 				break;
 			case '/':
-				doType(VK_SLASH);
+				doType(VK_SHIFT, VK_7);
 				break;
 			case '?':
 				doType(VK_SHIFT, VK_SLASH);
@@ -352,6 +365,7 @@ class Paster extends Thread {
 				doType(VK_SPACE);
 				break;
 			case '\r':
+				doType(VK_HOME);
 				break;
 			default:
 				throw new IllegalArgumentException("Cannot type character " + s);
@@ -363,6 +377,8 @@ class Paster extends Thread {
 	}
 
 	private void doType(int[] keyCodes, int offset, int length) {
+
+
 		if (length == 0) {
 			return;
 		}
@@ -372,9 +388,8 @@ class Paster extends Thread {
 			robot.keyRelease(keyCodes[offset]);
 		}
 
-
 		try {
-			Thread.sleep(5);
+			Thread.sleep(millisBetweenClick);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
