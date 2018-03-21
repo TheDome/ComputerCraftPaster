@@ -17,20 +17,24 @@ class Paster extends Thread {
 	private JButton stopButton;
 	private int millisBetweenClick;
 	private Robot robot = null;
+	private JEditorPane textArea;
 
-	Paster(String s, int milis, JButton stop, int milisBetweenClick) {
+	Paster(String s, int milis, JButton stop, JEditorPane text, int milisBetweenClick) {
 		paste = s;
 		delay = milis;
 		stopButton = stop;
 		millisBetweenClick = milisBetweenClick;
+		textArea = text;
 	}
 
 	@Override
 	public void run() {
 		super.run();
 		stopButton.setEnabled(true);
+		textArea.setEnabled(false);
 		printOnScreen(paste, delay);
 		stopButton.setEnabled(false);
+		textArea.setEnabled(true);
 	}
 
 	private void printOnScreen(String s, int millis) {

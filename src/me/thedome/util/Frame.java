@@ -58,7 +58,7 @@ public class Frame extends JFrame {
 				stopButton.setEnabled(false);
 
 				startListener = e -> {
-					p = new Paster(textArea.getText(), Integer.parseInt(timeUntilCopySpinner.getValue().toString()), stopButton, Integer.parseInt(msBetweenClickSpinner.getValue().toString()));
+					p = new Paster(textArea.getText(), Integer.parseInt(timeUntilCopySpinner.getValue().toString()), stopButton, textArea, Integer.parseInt(msBetweenClickSpinner.getValue().toString()));
 					p.start();
 				};
 
@@ -70,7 +70,7 @@ public class Frame extends JFrame {
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
 					try {
-						p = new Paster((String) clipboard.getData(DataFlavor.stringFlavor), Integer.parseInt(timeUntilCopySpinner.getValue().toString()), stopButton, Integer.parseInt(msBetweenClickSpinner.getValue().toString()));
+						p = new Paster((String) clipboard.getData(DataFlavor.stringFlavor), Integer.parseInt(timeUntilCopySpinner.getValue().toString()), stopButton, textArea, Integer.parseInt(msBetweenClickSpinner.getValue().toString()));
 						p.start();
 					} catch (Exception e1) {
 					}
