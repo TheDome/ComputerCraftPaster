@@ -7,25 +7,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="15e4b" layout-manager="FlowLayout" hgap="5" vgap="0" flow-align="1">
-        <constraints border-constraint="North"/>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <scrollpane id="92ecd">
-            <constraints/>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="780e5" class="javax.swing.JEditorPane" binding="editorPane1" default-binding="true">
-                <constraints/>
-                <properties/>
-              </component>
-            </children>
-          </scrollpane>
-        </children>
-      </grid>
-      <grid id="7840f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="7840f" binding="inputsPanel" custom-create="true" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="South"/>
         <properties>
           <enabled value="true"/>
@@ -51,7 +33,7 @@
               <text value="Paste"/>
             </properties>
           </component>
-          <component id="a0884" class="javax.swing.JSpinner" binding="spinner1" default-binding="true">
+          <component id="a0884" class="javax.swing.JSpinner" binding="waitSpinner" custom-create="true">
             <constraints/>
             <properties/>
           </component>
@@ -61,7 +43,7 @@
               <text value="ms until copy"/>
             </properties>
           </component>
-          <component id="47ba5" class="javax.swing.JSpinner" binding="spinner2" default-binding="true">
+          <component id="47ba5" class="javax.swing.JSpinner" binding="keyPressSpinner" custom-create="true">
             <constraints/>
             <properties/>
           </component>
@@ -71,6 +53,30 @@
               <text value="ms between keypress"/>
             </properties>
           </component>
+        </children>
+      </grid>
+      <grid id="b74c4" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <minimumSize width="200" height="200"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <scrollpane id="92ecd">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <minimumSize width="300" height="200"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="780e5" class="javax.swing.JEditorPane" binding="textArea">
+                <constraints/>
+                <properties>
+                  <minimumSize width="200" height="300"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
     </children>
