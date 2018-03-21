@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="me.thedome.util.MainFrame">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="1089" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="15e4b" layout-manager="FlowLayout" hgap="5" vgap="0" flow-align="1">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <scrollpane id="92ecd">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="780e5" class="javax.swing.JEditorPane" binding="editorPane1" default-binding="true">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+      <grid id="7840f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties>
+          <enabled value="true"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="6b980" class="javax.swing.JButton" binding="stopButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <horizontalTextPosition value="0"/>
+              <text value="Stop"/>
+            </properties>
+          </component>
+          <component id="74225" class="javax.swing.JButton" binding="pasteFromClipbordButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Paste from clipbord!"/>
+            </properties>
+          </component>
+          <component id="6d4b2" class="javax.swing.JButton" binding="pasteButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Paste"/>
+            </properties>
+          </component>
+          <component id="a0884" class="javax.swing.JSpinner" binding="spinner1" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="27d9e" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="ms until copy"/>
+            </properties>
+          </component>
+          <component id="47ba5" class="javax.swing.JSpinner" binding="spinner2" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="3906f" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="ms between keypress"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
