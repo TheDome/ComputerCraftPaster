@@ -1,5 +1,7 @@
 package me.thedome.util;
 
+import me.thedome.main.Main;
+
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
@@ -53,11 +55,13 @@ public class MainFrame {
 
 		stopButton.setEnabled(false);
 
-		JFrame f = new JFrame();
+		JFrame f = new JFrame("Pasting utility v" + Main.VERSION);
 		f.setContentPane($$$getRootComponent$$$());
-		f.setVisible(true);
 		f.pack();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/me/thedome/resources/paster.png")));
+
+		f.setVisible(true);
 	}
 
 	public static void main(String[] args) {

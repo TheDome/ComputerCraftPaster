@@ -1,6 +1,6 @@
 package me.thedome.main;
 
-import me.thedome.util.Frame;
+import me.thedome.util.MainFrame;
 
 /**
  * ComputerCraft Paster/me.thedome.main
@@ -8,8 +8,10 @@ import me.thedome.util.Frame;
  */
 public class Main {
 
+	public static String VERSION = "1.5";
+
 	public static void main(String[] args){
-		Frame f = new Frame();
+		new MainFrame();
 	}
 
 }
