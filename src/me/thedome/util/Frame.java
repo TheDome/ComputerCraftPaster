@@ -3,6 +3,8 @@ package me.thedome.util;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ActionListener;
 
 /**
@@ -12,9 +14,10 @@ import java.awt.event.ActionListener;
 public class Frame extends JFrame {
 
 	private final JFrame frame = this;
+	Paster p;
 	private ActionListener startListener;
 	private ActionListener stopListener;
-	Paster p;
+	private ActionListener clipboardPasteListener;
 
 
 	public Frame() {
@@ -49,6 +52,7 @@ public class Frame extends JFrame {
 				JLabel msBetweenClick = new JLabel("ms between keypresses");
 				JLabel label = new JLabel("ms until copy");
 				JButton startButton = new JButton("Paste");
+				JButton clipboardPaste = new JButton("Paste clipboard!");
 				JButton stopButton = new JButton("Stop");
 
 				stopButton.setEnabled(false);
@@ -60,8 +64,22 @@ public class Frame extends JFrame {
 
 				stopListener = e -> p.stopKeys();
 
+				clipboardPasteListener = e -> {
+
+					// Get the text from the clipboard
+					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+					try {
+						p = new Paster((String) clipboard.getData(DataFlavor.stringFlavor), Integer.parseInt(timeUntilCopySpinner.getValue().toString()), stopButton, Integer.parseInt(msBetweenClickSpinner.getValue().toString()));
+						p.start();
+					} catch (Exception e1) {
+					}
+				};
+
 				startButton.addActionListener(startListener);
 				stopButton.addActionListener(stopListener);
+
+				clipboardPaste.addActionListener(clipboardPasteListener);
 
 				DefaultCaret caret = (DefaultCaret) textArea.getCaret();
 				caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -69,6 +87,7 @@ public class Frame extends JFrame {
 
 				panel.add(scroller);
 				inputpanel.add(stopButton);
+				inputpanel.add(clipboardPaste);
 				inputpanel.add(startButton);
 				inputpanel.add(timeUntilCopySpinner);
 				inputpanel.add(label);
